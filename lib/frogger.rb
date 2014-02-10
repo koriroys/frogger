@@ -1,6 +1,7 @@
 require "hasu"
 
 Hasu.load "ball.rb"
+Hasu.load "paddle.rb"
 
 class Pong < Hasu::Window
   WIDTH = 768
@@ -16,11 +17,17 @@ class Pong < Hasu::Window
     @left_score = 0
     @right_score = 0
 
+    @left_paddle = Paddle.new(:left)
+    @right_paddle = Paddle.new(:right)
+
     @font = Gosu::Font.new(self, "Arial", 30)
   end
 
   def draw
     @ball.draw(self)
+
+    @left_paddle.draw(self)
+    @right_paddle.draw(self)
 
     @font.draw(@left_score, 30, 30, 0)
     @font.draw(@right_score, WIDTH - 50, 30, 0)
