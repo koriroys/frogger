@@ -1,5 +1,6 @@
-# require "bundler/setup"
 require "hasu"
+
+Hasu.load "ball.rb"
 
 class Pong < Hasu::Window
   WIDTH = 768
@@ -7,6 +8,18 @@ class Pong < Hasu::Window
 
   def initialize
     super(WIDTH, HEIGHT, false)
+  end
+
+  def reset
+    @ball = Ball.new
+  end
+
+  def draw
+    @ball.draw(self)
+  end
+
+  def update
+    @ball.move!
   end
 end
 
