@@ -23,13 +23,7 @@ class Ball
     @x += dx
     @y += dy
 
-    if @y < 0
-      @y = 0
-      bounce_off_edge!
-    end
-
-    if @y > Pong::HEIGHT
-      @y = Pong::HEIGHT
+    if off_bottom? || off_top?
       bounce_off_edge!
     end
   end
@@ -52,5 +46,21 @@ class Ball
       x2, y2, color,
       x2, y1, color,
     )
+  end
+
+  def off_top?
+    y1 < 0
+  end
+
+  def off_bottom?
+    y2 > Pong::HEIGHT
+  end
+
+  def off_left?
+    x1 < 0
+  end
+
+  def off_right?
+    x2 > Pong::WIDTH
   end
 end
