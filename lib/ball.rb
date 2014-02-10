@@ -16,6 +16,16 @@ class Ball
 
     @x += dx
     @y += dy
+
+    if @y < 0
+      @y = 0
+      @angle = Gosu.angle(0, 0, dx, -dy)
+    end
+
+    if @y > Pong::HEIGHT
+      @y = Pong::HEIGHT
+      @angle = Gosu.angle(0, 0, dx, -dy)
+    end
   end
 
   def x1; @x - SIZE/2; end
