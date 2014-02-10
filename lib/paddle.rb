@@ -1,12 +1,21 @@
 class Paddle
   WIDTH = 16
   HEIGHT = 96
+  SPEED = 6
 
   attr_reader :side, :y
 
   def initialize(side)
     @side = side
     @y = Pong::HEIGHT / 2
+  end
+
+  def up!
+    @y -= SPEED
+  end
+
+  def down!
+    @y += SPEED
   end
 
   def x1
