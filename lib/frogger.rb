@@ -37,6 +37,13 @@ class Pong < Hasu::Window
       @right_score += 1
     end
   end
+
+  def button_down(button)
+    case button
+    when Gosu::KbEscape
+      close
+    end
+  end
 end
 
 Pong.run
