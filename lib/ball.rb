@@ -48,6 +48,24 @@ class Ball
     )
   end
 
+  def intersect?(paddle)
+    x1 < paddle.x2 &&
+      x2 > paddle.x1 &&
+      y1 < paddle.y2 &&
+      y2 > paddle.y1
+  end
+
+  def bounce_off_paddle!(paddle)
+    case paddle.side
+    when :left
+      @x = paddle.x2 + SIZE / 2
+    when :right
+      @x = paddle.x1 - SIZE / 2
+    end
+
+    @angle = Gosu.angle(0, 0, -dx, dy)
+  end
+
   def off_top?
     y1 < 0
   end
