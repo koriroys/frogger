@@ -4,8 +4,8 @@ class Frog
   attr_reader :x, :y, :angle, :speed
 
   def initialize(angle = rand(0..359))
-    @x = Frogger::WIDTH/2
-    @y = Frogger::HEIGHT/2
+    @x = rand(1..Frogger::WIDTH)
+    @y = rand(1..Frogger::HEIGHT)
 
     @angle = angle
     @speed = 16
