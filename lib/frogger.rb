@@ -1,9 +1,8 @@
 require "hasu"
 
-Hasu.load "ball.rb"
-Hasu.load "paddle.rb"
+Hasu.load "frog.rb"
 
-class Pong < Hasu::Window
+class Frogger < Hasu::Window
   WIDTH = 768
   HEIGHT = 576
 
@@ -12,61 +11,51 @@ class Pong < Hasu::Window
   end
 
   def reset
-    @ball = Ball.new
-
-    @left_score = 0
-    @right_score = 0
-
-    @left_paddle = Paddle.new(:left, true)
-    @right_paddle = Paddle.new(:right)
+    @frog = Frog.new
+    @frog2 = Frog.new
 
     @font = Gosu::Font.new(self, "Arial", 30)
   end
 
   def draw
-    @ball.draw(self)
+    @frog.draw(self)
+    @frog2.draw(self)
 
-    @left_paddle.draw(self)
-    @right_paddle.draw(self)
-
-    @font.draw(@left_score, 30, 30, 0)
-    @font.draw(@right_score, WIDTH - 50, 30, 0)
+    @font.draw(@frog.angle, 30, 30, 0)
+    @font.draw(@frog2.angle, 30, 60, 0)
+    # @font.draw(@right_score, WIDTH - 50, 30, 0)
   end
 
   def update
-    @ball.move!
+    @frog.move!
+    @frog2.move!
 
-    if @left_paddle.ai?
-      @left_paddle.ai_move!(@ball)
-    else
-      if button_down?(Gosu::KbW)
-        @left_paddle.up!
-      end
-      if button_down?(Gosu::KbS)
-        @left_paddle.down!
-      end
-    end
+    # @left_paddle.ai_move!(@frog)
+      # if button_down?(Gosu::KbW)
+      #   @left_paddle.up!
+      # end
+      # if button_down?(Gosu::KbS)
+      #   @left_paddle.down!
+      # end
 
     if button_down?(Gosu::KbUp)
-      @right_paddle.up!
+      @frog.move!
     end
+
     if button_down?(Gosu::KbDown)
-      @right_paddle.down!
+      @frog.move!
     end
 
-    if @ball.intersect?(@left_paddle)
-      @ball.bounce_off_paddle!(@left_paddle)
-    end
-    if @ball.intersect?(@right_paddle)
-      @ball.bounce_off_paddle!(@right_paddle)
+    if @frog.off_right?
+      @frog = Frog.new
+    elsif @frog.off_left?
+      @frog = Frog.new
     end
 
-    if @ball.off_right?
-      @ball = Ball.new
-      @left_score += 1
-    elsif @ball.off_left?
-      @ball = Ball.new
-      @right_score += 1
+    if @frog2.off_right?
+      @frog2 = Frog.new
+    elsif @frog2.off_left?
+      @frog2 = Frog.new
     end
   end
 
@@ -78,4 +67,4 @@ class Pong < Hasu::Window
   end
 end
 
-Pong.run
+Frogger.run
