@@ -6,9 +6,11 @@ class Frog
   def initialize(angle = rand(0..359))
     @x = rand(1..Frogger::WIDTH)
     @y = rand(1..Frogger::HEIGHT)
+    @color = Gosu::Color.argb(255, rand(0..255), rand(0..255), rand(0..255))
+    # @color = Gosu::Color.const_get(Gosu::Color.constants.slice(4..-1).sample)
 
     @angle = angle
-    @speed = 16
+    @speed = [4,8,12,16,20].sample
   end
 
   def dx
@@ -36,29 +38,13 @@ class Frog
   def y2; @y + SIZE/2; end
 
   def draw(window)
-    color = Gosu::Color::GREEN
-
     window.draw_quad(
-      x1, y1, color,
-      x1, y2, color,
-      x2, y2, color,
-      x2, y1, color,
+      x1, y1, @color,
+      x1, y2, @color,
+      x2, y2, @color,
+      x2, y1, @color,
     )
   end
-
-  # def bounce_off_paddle!(paddle)
-  #   case paddle.side
-  #   when :left
-  #     @x = paddle.x2 + SIZE / 2
-  #   when :right
-  #     @x = paddle.x1 - SIZE / 2
-  #   end
-
-  #   ratio = (y - paddle.y) / Paddle::HEIGHT
-  #   @angle = ratio * 120 + 90
-  #   @angle *= -1 if paddle.side == :right
-  #   @speed *= 1.1
-  # end
 
   def off_top?
     y1 < 0
