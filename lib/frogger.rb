@@ -5,6 +5,8 @@ Hasu.load "frog.rb"
 class Frogger < Hasu::Window
   WIDTH = 768
   HEIGHT = 576
+  CENTER_X = WIDTH / 2
+  CENTER_Y = HEIGHT / 2
 
   def initialize
     super(WIDTH, HEIGHT, false)

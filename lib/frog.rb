@@ -3,13 +3,12 @@ class Frog
 
   attr_reader :x, :y, :angle, :speed
 
-  def initialize(angle = rand(0..359))
+  def initialize
     @x = rand(1..Frogger::WIDTH)
     @y = rand(1..Frogger::HEIGHT)
     @color = Gosu::Color.argb(255, rand(0..255), rand(0..255), rand(0..255))
-    # @color = Gosu::Color.const_get(Gosu::Color.constants.slice(4..-1).sample)
 
-    @angle = angle
+    @angle = Gosu.angle(Frogger::CENTER_X, Frogger::CENTER_Y, @x, @y) #rand(0..359)
     @speed = [4,8,12,16,20].sample
   end
 
