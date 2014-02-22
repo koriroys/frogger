@@ -2,11 +2,15 @@ class Frog
   SIZE = 16
 
   attr_reader :x, :y, :angle, :speed
+  attr_accessor :color
 
-  def initialize
+  def initialize(color: nil)
+    @color = color || Gosu::Color.argb(255, rand(0..255), rand(0..255), rand(0..255))
     @x = rand(1..Frogger::WIDTH)
     @y = rand(1..Frogger::HEIGHT)
-    @color = Gosu::Color.argb(255, rand(0..255), rand(0..255), rand(0..255))
+    @start_x = @x
+    @start_y = @y
+    # @color = Gosu::Color.argb(255, rand(0..255), rand(0..255), rand(0..255))
 
     @angle = Gosu.angle(Frogger::CENTER_X, Frogger::CENTER_Y, @x, @y) #rand(0..359)
     @speed = [4,8,12,16,20].sample
@@ -37,6 +41,7 @@ class Frog
       x2, y2, @color,
       x2, y1, @color,
     )
+    window.draw_line((x1 + x2)/2, (y1+y2)/2, @color, @start_x, @start_y, @color)
   end
 
   def off_top?

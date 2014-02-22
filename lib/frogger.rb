@@ -7,21 +7,19 @@ class Frogger < Hasu::Window
   HEIGHT = 576
   CENTER_X = WIDTH / 2
   CENTER_Y = HEIGHT / 2
+  COLORS = Gosu::Color.constants.slice(4..-1).map { |color| Gosu::Color.const_get(color) }
 
   def initialize
     super(WIDTH, HEIGHT, false)
   end
 
   def reset
-    @frogs = Array.new(5) { Frog.new }
+    @frogs = Array.new(100) { Frog.new }
     @font = Gosu::Font.new(self, "Arial", 12)
   end
 
   def draw
     @frogs.each { |f| f.draw(self) }
-    # @frogs.each.with_index do |frog, index|
-    #   @font.draw("#{index}: #{frog.angle}", 30, index * 13, 0)
-    # end
   end
 
   def update
@@ -35,9 +33,6 @@ class Frogger < Hasu::Window
       end
     end
 
-    if button_down?(Gosu::KbUp)
-      @frogs += Array.new(5) { Frog.new }
-    end
     if button_down?(Gosu::KbDown)
       @frogs = @frogs[0...-5]
     end
@@ -45,6 +40,9 @@ class Frogger < Hasu::Window
 
   def button_down(button)
     case button
+    when Gosu::KbUp
+      color = COLORS.sample
+      @frogs.each { |frog| frog.color = color }
     when Gosu::KbEscape
       close
     end
