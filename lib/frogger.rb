@@ -28,7 +28,7 @@ class Frogger < Hasu::Window
     @frogs.each(&:move!)
 
     @frogs.map! do |frog|
-      if frog.off_right? || frog.off_left?
+      if frog.off_right? || frog.off_left? || frog.off_bottom? || frog.off_top?
         Frog.new
       else
         frog

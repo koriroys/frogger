@@ -23,12 +23,6 @@ class Frog
   def move!
     @x += dx
     @y += dy
-
-    if off_bottom?
-      @angle = Gosu.angle(0, 0, dx, -dy)
-    elsif off_top?
-      @angle = Gosu.angle(0, 0, dx, -dy)
-    end
   end
 
   def x1; @x - SIZE/2; end
