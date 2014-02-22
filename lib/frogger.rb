@@ -34,7 +34,7 @@ class Frogger < Hasu::Window
     end
 
     if button_down?(Gosu::KbDown)
-      @frogs = @frogs[0...-5]
+      @frogs.each { |frog| frog.speed -= 1 }
     end
   end
 
@@ -42,7 +42,7 @@ class Frogger < Hasu::Window
     case button
     when Gosu::KbUp
       color = COLORS.sample
-      @frogs.each { |frog| frog.color = color }
+      @frogs.each { |frog| frog.tail_color = color }
     when Gosu::KbEscape
       close
     end
