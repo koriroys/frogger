@@ -11,7 +11,7 @@ class Frogger < Hasu::Window
   end
 
   def reset
-    @frogs = Array.new(10) { Frog.new }
+    @frogs = Array.new(5) { Frog.new }
     @font = Gosu::Font.new(self, "Arial", 12)
   end
 
@@ -31,6 +31,13 @@ class Frogger < Hasu::Window
       else
         frog
       end
+    end
+
+    if button_down?(Gosu::KbUp)
+      @frogs += Array.new(5) { Frog.new }
+    end
+    if button_down?(Gosu::KbDown)
+      @frogs = @frogs[0...-5]
     end
   end
 
