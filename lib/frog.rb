@@ -23,6 +23,11 @@ class Frog
     @tail_color = @color
   end
 
+  def reset_to_start
+    @x = @start_x
+    @y = @start_y
+  end
+
   def dx
     Gosu.offset_x(angle, speed)
   end

@@ -23,7 +23,7 @@ class Frogger < Hasu::Window
 
   def draw
     @frogs.each { |f| f.draw(self) }
-    @font.draw(@frame_count, 30, 30, 0)
+    # @font.draw(@frame_count, 30, 30, 0)
     # @grid.draw(self)
   end
 
@@ -31,11 +31,9 @@ class Frogger < Hasu::Window
     @frame_count += 1
     @frogs.each(&:move!)
 
-    @frogs.map! do |frog|
+    @frogs.each do |frog|
       if frog.off_right? || frog.off_left? || frog.off_bottom? || frog.off_top?
-        Frog.new
-      else
-        frog
+        frog.reset_to_start
       end
     end
 
