@@ -5,7 +5,7 @@ class Frog
   attr_accessor :tail_color, :speed
 
   def initialize(color: nil)
-    @color = Gosu::Color.argb(255, rand(0..255), rand(0..255), rand(0..255))
+    randomize_color
     @tail_color = color || @color
     @x = rand(1..Frogger::WIDTH)
     @y = rand(1..Frogger::HEIGHT)
@@ -16,6 +16,11 @@ class Frog
     @angle = Gosu.angle(Frogger::CENTER_X, Frogger::CENTER_Y, @x, @y) #rand(0..359)
     @speed = 1
     # @speed = [4,8,12,16,20].sample
+  end
+
+  def randomize_color
+    @color = Gosu::Color.argb(255, rand(0..255), rand(0..255), rand(0..255))
+    @tail_color = @color
   end
 
   def dx

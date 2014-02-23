@@ -18,14 +18,17 @@ class Frogger < Hasu::Window
     @frogs = Array.new(100) { Frog.new }
     @font = Gosu::Font.new(self, "Arial", 12)
     @grid = Grid.new
+    @frame_count = 0
   end
 
   def draw
     @frogs.each { |f| f.draw(self) }
-    @grid.draw(self)
+    @font.draw(@frame_count, 30, 30, 0)
+    # @grid.draw(self)
   end
 
   def update
+    @frame_count += 1
     @frogs.each(&:move!)
 
     @frogs.map! do |frog|
@@ -37,12 +40,27 @@ class Frogger < Hasu::Window
     end
 
     if button_down?(Gosu::KbDown)
-      @frogs.each { |frog| frog.speed -= 1 }
+      @frogs.each.with_index { |frog, index|
+        if index.even?
+          frog.speed -= 1
+        else
+          frog.speed += 1
+        end
+      }
+    end
+    if button_down?(Gosu::KbE) && button_down?(Gosu::KbLeftShift)
+      if @frame_count % 20 == 0
+        @frogs.each(&:randomize_color)
+      end
     end
   end
 
   def button_down(button)
     case button
+    when Gosu::KbS
+      @frogs.each { |frog| frog.speed = -frog.speed }
+    when Gosu::KbE
+      @frogs.each(&:randomize_color)
     when Gosu::KbUp
       color = COLORS.sample
       @frogs.each { |frog| frog.tail_color = color }
