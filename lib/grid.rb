@@ -14,25 +14,25 @@ class Grid
       Frogger::WIDTH, 0, @color, z = -1)
 
     [
-      [19, 15],
-      [39, 30],
-      [59, 45],
-      [79, 60],
-      [99, 75],
-      [119, 90],
-      [139, 105],
-      [159, 120],
-      [179, 135],
-      [199, 150],
-      [219, 165],
-      [239, 180],
-      [259, 195],
-      [279, 210],
-      [299, 225],
-      [319, 240],
-      [339, 255],
-      [359, 270],
-      [379, 285],
+      # two grid subdivisions
+      [Frogger::WIDTH/4, Frogger::HEIGHT/4],
+      # four grid subdivisions
+      [Frogger::WIDTH/4 * 1.5, Frogger::HEIGHT/4 * 1.5],
+      [Frogger::WIDTH/4 * 0.5, Frogger::HEIGHT/4 * 0.5],
+      # 8 grid subdivisions
+      [Frogger::WIDTH/8 * 0.5, Frogger::HEIGHT/8 * 0.5],
+      [Frogger::WIDTH/8 * 1.5, Frogger::HEIGHT/8 * 1.5],
+      [Frogger::WIDTH/8 * 2.5, Frogger::HEIGHT/8 * 2.5],
+      [Frogger::WIDTH/8 * 3.5, Frogger::HEIGHT/8 * 3.5],
+      # 16 grid subdivisions
+      [Frogger::WIDTH/16 * 0.5, Frogger::HEIGHT/16 * 0.5],
+      [Frogger::WIDTH/16 * 1.5, Frogger::HEIGHT/16 * 1.5],
+      [Frogger::WIDTH/16 * 2.5, Frogger::HEIGHT/16 * 2.5],
+      [Frogger::WIDTH/16 * 3.5, Frogger::HEIGHT/16 * 3.5],
+      [Frogger::WIDTH/16 * 4.5, Frogger::HEIGHT/16 * 4.5],
+      [Frogger::WIDTH/16 * 5.5, Frogger::HEIGHT/16 * 5.5],
+      [Frogger::WIDTH/16 * 6.5, Frogger::HEIGHT/16 * 6.5],
+      [Frogger::WIDTH/16 * 7.5, Frogger::HEIGHT/16 * 7.5],
     ].each do |x,y|
       draw_box(x, y, Frogger::WIDTH - x, Frogger::HEIGHT - y, window)
     end
