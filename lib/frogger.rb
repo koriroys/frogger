@@ -1,6 +1,7 @@
 require "hasu"
 
 Hasu.load "frog.rb"
+Hasu.load "grid.rb"
 
 class Frogger < Hasu::Window
   WIDTH = 768
@@ -16,10 +17,12 @@ class Frogger < Hasu::Window
   def reset
     @frogs = Array.new(100) { Frog.new }
     @font = Gosu::Font.new(self, "Arial", 12)
+    @grid = Grid.new
   end
 
   def draw
     @frogs.each { |f| f.draw(self) }
+    @grid.draw(self)
   end
 
   def update
