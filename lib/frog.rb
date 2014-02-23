@@ -28,6 +28,10 @@ class Frog
     @y = @start_y
   end
 
+  def randomize_direction
+    @angle = rand(0..359)
+  end
+
   def dx
     Gosu.offset_x(angle, speed)
   end

@@ -46,6 +46,9 @@ class Frogger < Hasu::Window
         end
       }
     end
+    if button_down?(Gosu::KbLeftShift) && button_down?(Gosu::KbX)
+      @frogs.each(&:randomize_direction)
+    end
     if button_down?(Gosu::KbE) && button_down?(Gosu::KbLeftShift)
       if @frame_count % 20 == 0
         @frogs.each(&:randomize_color)
@@ -55,6 +58,8 @@ class Frogger < Hasu::Window
 
   def button_down(button)
     case button
+    when Gosu::KbX
+      @frogs.each(&:randomize_direction)
     when Gosu::KbS
       @frogs.each { |frog| frog.speed = -frog.speed }
     when Gosu::KbE
